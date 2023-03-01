@@ -1,3 +1,75 @@
+const Projects = (function name(params) {
+  const projectsArray = [];
+  const createProject = function (params) {
+    const newprojectobjet = {
+      name: params,
+      newproject: [],
+    };
+    projectsArray.push(newprojectobjet);
+  };
+  return;
+})();
+
+const domManipulation = (function domManipulation(arg) {
+  const arrayToDoItems = [];
+  function populateArray(num) {
+    arrayToDoItems.push(num);
+    return;
+  }
+  function renderOnScreen(arg) {
+    const container = document.querySelector(".container");
+    arg.forEach((element) => {
+      const itemcontainer = document.createElement("div");
+      itemcontainer.classList.add("item-container");
+
+      const title = element.title;
+      const description = element.descriptiton;
+      const dueDate = element.dueDate;
+      const priority = element.priority;
+      const notes = element.notes;
+      const checklist = element.checklist;
+
+      const textnodes = [
+        title,
+        description,
+        dueDate,
+        priority,
+        notes,
+        checklist,
+      ];
+
+      /**
+       *
+       * @param {Array} array from textnote that is used to create paragraph
+       */
+
+      function makeDomElement(array) {
+        for (let index = 0; index < array.length; index++) {
+          const element = array[index];
+
+          const domElement = document.createElement("p");
+
+          domElement.textContent = element;
+          itemcontainer.append(domElement);
+        }
+        const removeElementBtn = document.createElement("button");
+        itemcontainer.append(removeElementBtn);
+        removeElementBtn.classList.add("remove-btn");
+        removeElementBtn.textContent = "x";
+        removeElementBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          container.removeChild(itemcontainer);
+        });
+      }
+
+      makeDomElement(textnodes);
+      container.appendChild(itemcontainer);
+    });
+  }
+
+  return { render: renderOnScreen, populateArray, arrayToDoItems };
+})();
+
 const ToDoItems = class items {
   constructor(title, description, dueDate, priority, notes, checklist) {
     this.title = title;
@@ -7,63 +79,17 @@ const ToDoItems = class items {
     this.notes = notes;
     this.checklist = checklist;
   }
-
-  items = [];
-
-  generateItems(num) {
-    const container = document.querySelectorAll(".container");
-
-    for (let i = 0; i < num; i++) {
-      const loop = new ToDoItems(
-        "play",
-        "may",
-        "ayyyyyy",
-        "anata",
-        "babilion",
-        "fex"
-      );
-      items.push(loop);
-    }
-    return;
-  }
-
-  /**
-   *
-   * @param {Array} arg this is an arroy of items the function will create recreate with html on the page
-   */
-  render(arg) {
-    const container = document.querySelectorAll(".container");
-
-    arg.forEach((element) => {
-      const itemcontainer = document.createElement("div");
-      const title = document.createTextNode("element.title");
-      const description = document.createTextNode("element.descriptiton");
-      const dueDate = document.createTextNode("element.dueDate");
-      const priority = document.createTextNode("element.priority");
-      const notes = document.createTextNode("element.notes");
-      const checklist = document.createTextNode("element.checklist");
-
-      const create = document.createElement("p");
-      create.appendChild(
-        title,
-        description,
-        dueDate,
-        priority,
-        notes,
-        checklist
-      );
-    });
-  }
+  removeToDoItem() {}
 };
 
-const new1 = new ToDoItems(
-  "ueoau",
-  "uheoaa",
-  "2020-01-01",
-  "low",
-  "uhoho's notes",
-  "uhoho's checklist"
+const try1 = new ToDoItems(
+  "go rest",
+  "this is blalabal",
+  "in 39 days",
+  "ULTRA",
+  "notes:bleh",
+  "checked"
 );
-new1.generateItems(5);
 
-new1.render(new1.items);
+domManipulation.populateArray(try1);
+domManipulation.render(domManipulation.arrayToDoItems);
