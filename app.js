@@ -1,14 +1,24 @@
 const Projects = (function name(params) {
   const projectsArray = [];
-  const createProject = function (params) {
-    const newprojectobjet = {
-      name: params,
-      newproject: [],
-    };
-    projectsArray.push(newprojectobjet);
+
+  const pushProject = function (array) {
+    projectsArray.push(array);
+    return;
   };
-  return;
+  const createProject = function (params) {
+    this.pArray = [];
+    this.name = params;
+    return { array: this.pArray, name: params.name };
+  };
+
+  return { createProject, pushProject, projectsArray };
 })();
+
+const forPlaying = Projects.createProject("play");
+Projects.pushProject(forPlaying);
+console.dir(Projects.projectsArray);
+
+// console.log(Projects.projectsArray);
 
 const domManipulation = (function domManipulation(arg) {
   const arrayToDoItems = [];
@@ -79,7 +89,7 @@ const ToDoItems = class items {
     this.notes = notes;
     this.checklist = checklist;
   }
-  removeToDoItem() {}
+  // removeToDoItem() {}
 };
 
 const try1 = new ToDoItems(
